@@ -1,39 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import axios from '../../services/axios';
 import { Div } from './styled';
 
 export default function Popup({ close }) {
   const [nome, setNome] = useState('');
-  const [tombo, setTombo] = useState('');
   const [autor, setAutor] = useState('');
   const [quantidade, setQuantidade] = useState('');
-  const [data_chegada, setChegada] = useState('');
-  const [data_lancamento, setLancamento] = useState('');
-  const [volume, setVolume] = useState('');
+  const [ano, setAno] = useState('');
   const [edicao, setEdicao] = useState('');
-  const [local, setLocal] = useState('');
   const [editora, setEditora] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/livros', {
-        tombo,
-        nome,
-        autor,
-        quantidade,
-        data_chegada,
-        data_lancamento,
-        volume,
-        edicao,
-        local,
-        editora,
+      await axios.post('/livros', {
+        nome, autor, quantidade, ano, edicao, editora,
       });
-      console.log(response.data);
-    } catch {
-      console.log('deu erro');
+      toast.success('Livro cadastrado.');
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -60,12 +48,12 @@ export default function Popup({ close }) {
             />
           </label>
           <label htmlFor="chegada-livro">
-            Data de chegada
+            Ano
             <input
               type="text"
               id="chegada-livro"
-              value={data_chegada}
-              onChange={(e) => setChegada(e.target.value)}
+              value={ano}
+              onChange={(e) => setAno(e.target.value)}
             />
           </label>
         </div>
