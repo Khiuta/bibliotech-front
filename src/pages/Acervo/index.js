@@ -13,6 +13,7 @@ export default function Acervo() {
   const [popup, setPopup] = useState(false);
   const [livros, setLivros] = useState([]);
   const [busca, setBusca] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = (identifier) => {
     const newControl = control === identifier ? false : identifier;
@@ -40,8 +41,10 @@ export default function Acervo() {
 
   useEffect(() => {
     async function getData() {
+      setIsLoading(true);
       const response = await axios.get('/livros');
       setLivros(response.data);
+      setIsLoading(false);
     }
 
     getData();
@@ -92,6 +95,12 @@ export default function Acervo() {
     });
   };
 
+  if (isLoading) {
+    return (
+      <h1>Carregando...</h1>
+    );
+  }
+
   return (
     <Content>
       <Menu />
@@ -122,21 +131,21 @@ export default function Acervo() {
                       {livro.autor}
                     </p>
                     <p>
-                      Chegada
+                      Ano -
                       {' '}
-                      {livro.data_chegada}
+                      {livro.ano}
                       {' '}
-                      | Lançamento
-                      {' '}
-                      {livro.data_lancamento}
-                      {' '}
-                      | Volume
-                      {' '}
-                      {livro.volume}
-                      {' '}
-                      | Editora
+                      | Editora -
                       {' '}
                       {livro.editora}
+                      {' '}
+                      | Edição -
+                      {' '}
+                      {livro.edicao}
+                      {' '}
+                      | Tombo -
+                      {' '}
+                      {livro.id}
                     </p>
                   </span>
                   {' '}
