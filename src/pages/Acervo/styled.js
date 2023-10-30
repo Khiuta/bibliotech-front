@@ -21,7 +21,7 @@ export const Content = styled.main`
     ::-webkit-scrollbar-thumb:hover {
         background: rgba(0, 0, 0, .5);
     }
-    
+
     .lado-2 {
         display: flex;
         flex: 1 1 100%;

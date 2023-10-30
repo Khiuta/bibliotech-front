@@ -6,6 +6,7 @@ import Menu from '../../components/Menu';
 import { Content } from './styled';
 import Popup from '../../components/Popup';
 import axios from '../../services/axios';
+import Loading from '../../components/Loading';
 
 export default function Acervo() {
   const [style, setStyle] = useState('baixo');
@@ -39,14 +40,14 @@ export default function Acervo() {
     setPopup(!newPopup);
   };
 
-  useEffect(() => {
-    async function getData() {
-      setIsLoading(true);
-      const response = await axios.get('/livros');
-      setLivros(response.data);
-      setIsLoading(false);
-    }
+  async function getData() {
+    setIsLoading(true);
+    const response = await axios.get('/livros');
+    setLivros(response.data);
+    setIsLoading(false);
+  }
 
+  useEffect(() => {
     getData();
   }, []);
 
@@ -97,7 +98,28 @@ export default function Acervo() {
 
   if (isLoading) {
     return (
-      <h1>Carregando...</h1>
+      <Content>
+        <Menu />
+        {popup && (
+        <Popup
+          close={handlePopup}
+          load={() => getData()}
+        />
+        )}
+        <div className="lado-2">
+          <header>
+            <h1>Acervo</h1>
+            <input
+              type="text"
+              placeholder="Digite o nome do livro"
+              onChange={(e) => setBusca(e.target.value)}
+            />
+          </header>
+          <div className="acervo">
+            <Loading />
+          </div>
+        </div>
+      </Content>
     );
   }
 
@@ -105,7 +127,12 @@ export default function Acervo() {
     <Content>
       <Menu />
       <div className="lado-2">
-        {popup && <Popup close={handlePopup} />}
+        {popup && (
+        <Popup
+          close={handlePopup}
+          load={() => getData()}
+        />
+        )}
         <header>
           <h1>Acervo</h1>
           <input

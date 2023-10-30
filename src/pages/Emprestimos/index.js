@@ -23,9 +23,17 @@ export default function Emprestimos() {
         livro, autor, tombo, aluno, turma, serie,
       });
       if (response.data === 'erro') {
-        toast.error('Este aluno não está disponível para empréstimos.');
+        return toast.error('Este aluno não está disponível para empréstimos.');
       }
       toast.success('Empréstimo cadastrado.');
+      // #region limpando dados
+      setLivro('');
+      setAutor('');
+      setTombo('');
+      setAluno('');
+      setTurma('');
+      setSerie('');
+      // #endregion limpando dados
     } catch {
       console.log('deu erro');
     }
@@ -53,6 +61,7 @@ export default function Emprestimos() {
     livros.forEach((liv) => {
       if (livro === liv.nome) {
         setAutor(liv.autor);
+        setTombo(liv.id);
       }
     });
   };
@@ -84,7 +93,7 @@ export default function Emprestimos() {
                   type="text"
                   id="autor-livro"
                   value={autor}
-                  onChange={(e) => setAutor(e.target.value)}
+                  // onChange={(e) => setAutor(e.target.value)}
                   placeholder="Nome do autor"
                 />
               </label>
@@ -94,7 +103,7 @@ export default function Emprestimos() {
                   type="text"
                   id="tombo-livro"
                   value={tombo}
-                  onChange={(e) => setTombo(e.target.value)}
+                  // onChange={(e) => setTombo(e.target.value)}
                   placeholder="Tombo do livro"
                 />
               </label>

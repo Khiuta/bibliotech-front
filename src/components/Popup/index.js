@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import axios from '../../services/axios';
 import { Div } from './styled';
 
-export default function Popup({ close }) {
+export default function Popup({ close, load }) {
   const [nome, setNome] = useState('');
   const [autor, setAutor] = useState('');
   const [quantidade, setQuantidade] = useState('');
@@ -20,6 +20,15 @@ export default function Popup({ close }) {
         nome, autor, quantidade, ano, edicao, editora,
       });
       toast.success('Livro cadastrado.');
+      load();
+      // #region limpando dados
+      setNome('');
+      setAutor('');
+      setQuantidade('');
+      setAno('');
+      setEdicao('');
+      setEditora('');
+      // #endregion limpando dados
     } catch (err) {
       console.log(err);
     }
@@ -97,4 +106,5 @@ export default function Popup({ close }) {
 
 Popup.propTypes = {
   close: PropTypes.func.isRequired,
+  load: PropTypes.func.isRequired,
 };

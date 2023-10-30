@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { BsCheckCircle } from 'react-icons/bs';
 import { AiOutlineClear } from 'react-icons/ai';
+import { toast } from 'react-toastify';
 import axios from '../../services/axios';
 
 import Menu from '../../components/Menu';
 import { Content } from './styled';
+import Loading from '../../components/Loading';
 
 export default function Historico() {
   const [emprestimos, setEmprestimos] = useState([]);
   const [busca, setBusca] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function getData() {
+    setIsLoading(true);
+    const response = await axios.get('/emprestimos');
+    setEmprestimos(response.data);
+    setInterval(() => {
+      setIsLoading(false);
+    }, 900);
+  }
 
   useEffect(() => {
-    async function getData() {
-      const response = await axios.get('/emprestimos');
-      setEmprestimos(response.data);
-      console.log(emprestimos);
-    }
     getData();
   }, []);
 
@@ -37,31 +44,47 @@ export default function Historico() {
         getEmprestados();
         break;
       default:
-        async function getData() {
-          const response = await axios.get('/emprestimos');
-          setEmprestimos(response.data);
-          console.log(emprestimos);
-        }
         getData();
         break;
     }
   };
 
   const handleWipe = async (e) => {
-    const { id } = e.target;
-    const newId = parseInt(id, 10);
-    console.log(typeof newId);
-    console.log(newId);
-
     try {
-      const response = await axios.put('/emprestimos', {
-        id: newId,
+      await axios.put('/emprestimos', {
+        id: e.target.id,
       });
-      console.log(response);
+      toast.success('Livro entregue.');
+      getData();
     } catch {
       console.log('deu errado');
     }
   };
+
+  if (isLoading) {
+    return (
+      <Content>
+        <Menu />
+        <div className="lado-2">
+          <header>
+            <h1>Histórico</h1>
+            <input type="text" placeholder="Digite o nome do livro" />
+          </header>
+          <aside>
+            <div className="icone"><AiOutlineClear size={40} onClick={handleFilter} className="icon" /></div>
+            <div className="texto">
+              <p className="pendente" onClick={handleFilter}>Pendente</p>
+              {' '}
+              <p className="emprestado" onClick={handleFilter}>Emprestado</p>
+            </div>
+          </aside>
+          <div className="emprestimos-loading">
+            <Loading />
+          </div>
+        </div>
+      </Content>
+    );
+  }
 
   return (
     <Content>

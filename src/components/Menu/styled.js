@@ -6,7 +6,7 @@ export const Sidebar = styled.div`
     border-right: 1px solid #5a5e66;
     height: 100vh;
     flex-direction: column;
-    
+
     a {
         text-decoration: none;
         color: #fff;

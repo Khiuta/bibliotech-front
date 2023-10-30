@@ -75,7 +75,7 @@ export const Content = styled.main`
         height: 80px;
         flex-direction: column;
     }
-    
+
     form footer {
         display: flex;
         flex: 1 1 100%;

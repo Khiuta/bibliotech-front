@@ -119,4 +119,13 @@ export const Content = styled.main`
         margin-top: 5px;
         cursor: pointer;
     }
+
+    .emprestimos-loading {
+      display: flex;
+      flex: 1 1 70%;
+      max-width: 90%;
+      height: 60vh;
+      justify-content: center;
+      align-items: center;
+    }
 `;
