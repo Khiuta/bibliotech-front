@@ -7,6 +7,7 @@ Para as turmas seguintes que irão mexer nesse projeto, aqui vai alguns pontos a
 4. Prezem pelo projeto e sempre tentem deixá-lo melhor, confiamos em vocês :).
 
 const turma = 'Informática 2020-2023';
+
 const criadores = [
   Duda, Gustavo, Hytalo, Isaac, Kamilly, Mateus, Miguel, Thalyson, Willgner,
 ];
