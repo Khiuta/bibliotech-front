@@ -59,4 +59,11 @@ export const Content = styled.main`
         background: ${colors.greenColor};
         color: #fff;
     }
+
+    .lado-2 .cards-loading {
+        display: flex;
+        flex: 1 1 100%;
+        justify-content: center;
+        align-items: center;
+    }
 `;
