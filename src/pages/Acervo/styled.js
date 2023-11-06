@@ -78,11 +78,19 @@ export const Content = styled.main`
         overflow-y: scroll;
     }
 
+    .acervo .caixa {
+      display: flex;
+      flex: 1 1 100%;
+      width: 55%;
+      align-items: center;
+      gap: 10px;
+    }
+
     .acervo .livro {
         display: flex;
         flex: 1 1 55%;
-        width: 55%;
-        max-width: 55%;
+        width: 100%;
+        max-width: 100%;
         height: 40px;
         max-height: 40px;
         background: #fff;
