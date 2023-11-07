@@ -144,7 +144,7 @@ export default function Acervo() {
         <div className="acervo">
           {livros.filter((livro) => (busca.toLowerCase() === ''
             ? livro
-            : livro.nome.toLowerCase().includes(busca)
+            : livro.nome.toLowerCase().includes(busca.toLowerCase())
           )).map((livro) => {
             if (control === livro.id) {
               return (

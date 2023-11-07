@@ -101,7 +101,7 @@ export const Content = styled.main`
         display: flex;
         flex: 1 1 70%;
         max-width: 70%;
-        height: 40px;
+        height: 60px;
         max-height: 60px;
         background: linear-gradient(to right, ${pendente} 0 5%, #fff 5% 100%);
         border-radius: 20px;
