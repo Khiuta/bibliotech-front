@@ -36,5 +36,6 @@ module.exports = {
     'default-param-last': 'off',
     'func-names': 'off',
     'consistent-return': 'off',
+    'react/jsx-pascal-case': 'off',
   },
 };

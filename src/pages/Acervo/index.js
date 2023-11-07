@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiTriangle } from 'react-icons/fi';
+import { AiOutlineEdit } from 'react-icons/ai';
 import excelJS from 'exceljs';
 
 import Menu from '../../components/Menu';
@@ -7,6 +8,7 @@ import { Content } from './styled';
 import Popup from '../../components/Popup';
 import axios from '../../services/axios';
 import Loading from '../../components/Loading';
+import Edit_popup from '../../components/Edit-popup';
 
 export default function Acervo() {
   const [style, setStyle] = useState('baixo');
@@ -15,6 +17,9 @@ export default function Acervo() {
   const [livros, setLivros] = useState([]);
   const [busca, setBusca] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  let id;
 
   const handleClick = (identifier) => {
     const newControl = control === identifier ? false : identifier;
@@ -96,6 +101,12 @@ export default function Acervo() {
     });
   };
 
+  const handleEdit = (identifier) => {
+    const newEditing = isEditing;
+    setIsEditing(!newEditing);
+    id = identifier;
+  };
+
   if (isLoading) {
     return (
       <Content>
@@ -104,6 +115,13 @@ export default function Acervo() {
         <Popup
           close={handlePopup}
           load={() => getData()}
+        />
+        )}
+        {isEditing && (
+        <Edit_popup
+          close={handleEdit}
+          load={() => getData()}
+          id={id}
         />
         )}
         <div className="lado-2">
@@ -148,7 +166,52 @@ export default function Acervo() {
           )).map((livro) => {
             if (control === livro.id) {
               return (
-                <section className="livro-exp" key={livro.id}>
+                <div className="caixa">
+                  <section className="livro-exp" key={livro.id}>
+                    <span>
+                      <p>
+                        {livro.nome}
+                        {' '}
+                        |
+                        {' '}
+                        {livro.autor}
+                      </p>
+                      <p>
+                        Ano -
+                        {' '}
+                        {livro.ano}
+                        {' '}
+                        | Editora -
+                        {' '}
+                        {livro.editora}
+                        {' '}
+                        | Edição -
+                        {' '}
+                        {livro.edicao}
+                        {' '}
+                        | Tombo -
+                        {' '}
+                        {livro.id}
+                      </p>
+                    </span>
+                    {' '}
+                    <FiTriangle className={style} onClick={() => handleClick(livro.id)} />
+                  </section>
+                  <section className="edit">
+                    <AiOutlineEdit
+                      className="edit-icon"
+                      size={36}
+                      color="#fff"
+                      cursor="pointer"
+                    />
+                  </section>
+                </div>
+              );
+            }
+
+            return (
+              <div className="caixa">
+                <section className="livro">
                   <span>
                     <p>
                       {livro.nome}
@@ -157,44 +220,20 @@ export default function Acervo() {
                       {' '}
                       {livro.autor}
                     </p>
-                    <p>
-                      Ano -
-                      {' '}
-                      {livro.ano}
-                      {' '}
-                      | Editora -
-                      {' '}
-                      {livro.editora}
-                      {' '}
-                      | Edição -
-                      {' '}
-                      {livro.edicao}
-                      {' '}
-                      | Tombo -
-                      {' '}
-                      {livro.id}
-                    </p>
                   </span>
                   {' '}
-                  <FiTriangle className={style} onClick={() => handleClick(livro.id)} />
+                  <FiTriangle className="baixo" onClick={() => handleClick(livro.id)} />
                 </section>
-              );
-            }
-
-            return (
-              <section className="livro">
-                <span>
-                  <p>
-                    {livro.nome}
-                    {' '}
-                    |
-                    {' '}
-                    {livro.autor}
-                  </p>
-                </span>
-                {' '}
-                <FiTriangle className="baixo" onClick={() => handleClick(livro.id)} />
-              </section>
+                <section className="edit">
+                  <AiOutlineEdit
+                    className="edit-icon"
+                    size={36}
+                    color="#fff"
+                    cursor="pointer"
+                    onClick={() => handleEdit(livro.id)}
+                  />
+                </section>
+              </div>
             );
           })}
         </div>

@@ -78,13 +78,21 @@ export const Content = styled.main`
         overflow-y: scroll;
     }
 
+    .acervo .caixa {
+      display: flex;
+      flex: 1 1 100%;
+      width: 55%;
+      align-items: center;
+      gap: 10px;
+    }
+
     .acervo .livro {
         display: flex;
         flex: 1 1 55%;
         width: 55%;
         max-width: 55%;
-        height: 100px;
-        max-height: 100px;
+        height: 40px;
+        max-height: 40px;
         background: #fff;
         border-radius: 20px;
         background: linear-gradient(to left, ${greenColor} 0 7%, #fff 7% 100%);
