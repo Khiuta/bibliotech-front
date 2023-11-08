@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FiTriangle } from 'react-icons/fi';
 import { AiOutlineEdit } from 'react-icons/ai';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import excelJS from 'exceljs';
+import { toast } from 'react-toastify';
 
 import Menu from '../../components/Menu';
 import { Content } from './styled';
@@ -18,6 +20,7 @@ export default function Acervo() {
   const [busca, setBusca] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [livro_busca, setLivroBusca] = useState([]);
 
   let id;
 
@@ -49,6 +52,17 @@ export default function Acervo() {
     setIsLoading(true);
     const response = await axios.get('/livros');
     setLivros(response.data);
+    setIsLoading(false);
+  }
+
+  async function getOne(identifier) {
+    setIsLoading(true);
+
+    const response = await axios.get(`/livros/${identifier}`);
+    setLivroBusca(response.data);
+
+    id = identifier;
+
     setIsLoading(false);
   }
 
@@ -102,9 +116,11 @@ export default function Acervo() {
   };
 
   const handleEdit = (identifier) => {
+    getOne(identifier);
     const newEditing = isEditing;
     setIsEditing(!newEditing);
     id = identifier;
+    console.log(`id: ${id}`);
   };
 
   if (isLoading) {
@@ -119,7 +135,7 @@ export default function Acervo() {
         )}
         {isEditing && (
         <Edit_popup
-          close={handleEdit}
+          close={() => handleEdit()}
           load={() => getData()}
           id={id}
         />
@@ -149,6 +165,18 @@ export default function Acervo() {
         <Popup
           close={handlePopup}
           load={() => getData()}
+        />
+        )}
+        {isEditing && (
+        <Edit_popup
+          close={() => handleEdit()}
+          load={() => getData()}
+          id={livro_busca.id}
+          nome_livro={livro_busca.nome}
+          autor_livro={livro_busca.autor}
+          ano_livro={livro_busca.ano}
+          edicao_livro={livro_busca.edicao}
+          editora_livro={livro_busca.editora}
         />
         )}
         <header>
@@ -198,11 +226,12 @@ export default function Acervo() {
                     <FiTriangle className={style} onClick={() => handleClick(livro.id)} />
                   </section>
                   <section className="edit">
-                    <AiOutlineEdit
+                    <BsThreeDotsVertical
                       className="edit-icon"
                       size={36}
                       color="#fff"
                       cursor="pointer"
+                      onClick={() => handleEdit(livro.id)}
                     />
                   </section>
                 </div>
@@ -225,7 +254,7 @@ export default function Acervo() {
                   <FiTriangle className="baixo" onClick={() => handleClick(livro.id)} />
                 </section>
                 <section className="edit">
-                  <AiOutlineEdit
+                  <BsThreeDotsVertical
                     className="edit-icon"
                     size={36}
                     color="#fff"

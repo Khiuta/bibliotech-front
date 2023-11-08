@@ -37,7 +37,7 @@ export const Content = styled.main`
         display: flex;
         flex: 1 1 300px;
         height: 500px;
-        max-width: 400px;
+        width: 400px;
         padding: 40px;
         background: #fff;
         flex-direction: column;
@@ -50,14 +50,20 @@ export const Content = styled.main`
         font-size: 200px;
     }
 
+    .lado-2 .cards .livros {
+        width: 40%;
+    }
+
     .lado-2 .cards .emp {
         background: ${colors.darkLigtColor};
         color: #fff;
+        width: 30%;
     }
 
     .lado-2 .cards .pen {
         background: ${colors.greenColor};
-        color: #fff;
+        color: #fff;        
+        width: 30%;
     }
 
     .lado-2 .cards-loading {

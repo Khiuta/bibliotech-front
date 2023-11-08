@@ -1,30 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import axios from '../../services/axios';
 import { Div } from './styled';
 
-export default function Popup({ close, load, id }) {
+export default function Popup({
+  close,
+  load,
+  id,
+  nome_livro,
+  autor_livro,
+  ano_livro,
+  edicao_livro,
+  editora_livro,
+}) {
   const [nome, setNome] = useState('');
   const [autor, setAutor] = useState('');
-  const [quantidade, setQuantidade] = useState('');
   const [ano, setAno] = useState('');
   const [edicao, setEdicao] = useState('');
   const [editora, setEditora] = useState('');
+
+  useEffect(() => {
+    setNome(nome_livro);
+    setAutor(autor_livro);
+    setAno(ano_livro);
+    setEdicao(edicao_livro);
+    setEditora(editora_livro);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.put(`/livros/${id}`, {
-        nome, autor, quantidade, ano, edicao, editora,
+        nome, autor, ano, edicao, editora,
       });
       toast.success('Livro atualizado.');
       load();
       // #region limpando dados
       setNome('');
       setAutor('');
-      setQuantidade('');
       setAno('');
       setEdicao('');
       setEditora('');
@@ -67,15 +82,6 @@ export default function Popup({ close, load, id }) {
           </label>
         </div>
         <div className="lado-2">
-          <label htmlFor="qtd-livro">
-            Quantidade
-            <input
-              type="text"
-              id="qtd-livro"
-              value={quantidade}
-              onChange={(e) => setQuantidade(e.target.value)}
-            />
-          </label>
           <label htmlFor="edicao-livro">
             Edição
             <input
@@ -104,8 +110,19 @@ export default function Popup({ close, load, id }) {
   );
 }
 
+Popup.defaultProps = {
+  ano_livro: '',
+  edicao_livro: '',
+  editora_livro: '',
+};
+
 Popup.propTypes = {
   close: PropTypes.func.isRequired,
   load: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  nome_livro: PropTypes.string.isRequired,
+  autor_livro: PropTypes.string.isRequired,
+  ano_livro: PropTypes.string,
+  edicao_livro: PropTypes.string,
+  editora_livro: PropTypes.string,
 };

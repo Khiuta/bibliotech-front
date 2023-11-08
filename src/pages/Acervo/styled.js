@@ -81,18 +81,18 @@ export const Content = styled.main`
     .acervo .caixa {
       display: flex;
       flex: 1 1 100%;
-      width: 55%;
+      width: 90%;
       align-items: center;
       gap: 10px;
     }
 
     .acervo .livro {
         display: flex;
-        flex: 1 1 55%;
-        width: 55%;
-        max-width: 55%;
-        height: 40px;
-        max-height: 40px;
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+        height: 70px;
+        max-height: 70px;
         background: #fff;
         border-radius: 20px;
         background: linear-gradient(to left, ${greenColor} 0 7%, #fff 7% 100%);
@@ -101,12 +101,15 @@ export const Content = styled.main`
         padding: 5px 20px 5px 30px;
         justify-content: space-between;
     }
+    .acervo p{
+        max-width: 90%
+    }  
 
     .acervo .livro-exp {
         display: flex;
-        flex: 1 1 55%;
-        width: 55%;
-        max-width: 55%;
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
         min-height: 100px;
         max-height: 120px;
         background: #fff;
@@ -116,6 +119,7 @@ export const Content = styled.main`
         align-items: center;
         padding: 5px 20px 5px 30px;
         justify-content: space-between;
+        cursor: pointer;
     }
 
     @keyframes pra-cima {
