@@ -11,6 +11,7 @@ import Popup from '../../components/Popup';
 import axios from '../../services/axios';
 import Loading from '../../components/Loading';
 import Edit_popup from '../../components/Edit-popup';
+import Delete_popup from '../../components/Delete-popup';
 
 export default function Acervo() {
   const [style, setStyle] = useState('baixo');
@@ -21,6 +22,7 @@ export default function Acervo() {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [livro_busca, setLivroBusca] = useState([]);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   let id;
 
@@ -128,6 +130,18 @@ export default function Acervo() {
     setIsEditing(!newEditing);
   };
 
+  const handleDelete = (identifier) => {
+    getOne(identifier);
+    const newDeleting = isDeleting;
+    setIsDeleting(!newDeleting);
+    console.log(identifier);
+  };
+
+  const closeDelete = () => {
+    const newDeleting = isDeleting;
+    setIsDeleting(!newDeleting);
+  };
+
   if (isLoading) {
     return (
       <Content>
@@ -183,6 +197,15 @@ export default function Acervo() {
           edicao_livro={livro_busca.edicao}
           editora_livro={livro_busca.editora}
         />
+        )}
+        {isDeleting && (
+          <Delete_popup
+            id={livro_busca.id}
+            close={() => closeDelete()}
+            load={() => getData()}
+            nome={livro_busca.nome}
+            edit={livro_busca.editora}
+          />
         )}
         <header>
           <h1>Acervo</h1>
@@ -243,6 +266,7 @@ export default function Acervo() {
                       size={30}
                       color="#fff"
                       cursor="pointer"
+                      onClick={() => handleDelete(livro.id)}
                     />
                   </section>
                 </div>
@@ -277,6 +301,7 @@ export default function Acervo() {
                     size={30}
                     color="#fff"
                     cursor="pointer"
+                    onClick={() => handleDelete(livro.id)}
                   />
                 </section>
               </div>

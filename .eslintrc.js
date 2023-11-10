@@ -39,5 +39,10 @@ module.exports = {
     'react/jsx-pascal-case': 'off',
     'no-return-assign': 'off',
     'linebreak-style': 'off',
+    'no-tabs': 'off',
+    'react/jsx-indent': 'off',
+    'react/jsx-closing-tag-location': 'off',
+    'object-curly-newline': 'off',
+    'react/jsx-one-expression-per-line': 'off',
   },
 };
