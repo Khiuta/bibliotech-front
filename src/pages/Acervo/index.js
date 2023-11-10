@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiTriangle } from 'react-icons/fi';
-import { AiOutlineEdit } from 'react-icons/ai';
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import excelJS from 'exceljs';
 import { toast } from 'react-toastify';
@@ -123,6 +123,11 @@ export default function Acervo() {
     console.log(`id: ${id}`);
   };
 
+  const closeEdit = () => {
+    const newEditing = isEditing;
+    setIsEditing(!newEditing);
+  };
+
   if (isLoading) {
     return (
       <Content>
@@ -135,7 +140,7 @@ export default function Acervo() {
         )}
         {isEditing && (
         <Edit_popup
-          close={() => handleEdit()}
+          close={() => closeEdit()}
           load={() => getData()}
           id={id}
         />
@@ -169,7 +174,7 @@ export default function Acervo() {
         )}
         {isEditing && (
         <Edit_popup
-          close={() => handleEdit()}
+          close={() => closeEdit()}
           load={() => getData()}
           id={livro_busca.id}
           nome_livro={livro_busca.nome}
@@ -226,12 +231,18 @@ export default function Acervo() {
                     <FiTriangle className={style} onClick={() => handleClick(livro.id)} />
                   </section>
                   <section className="edit">
-                    <BsThreeDotsVertical
+                    <AiOutlineEdit
                       className="edit-icon"
-                      size={36}
+                      size={30}
                       color="#fff"
                       cursor="pointer"
                       onClick={() => handleEdit(livro.id)}
+                    />
+                    <AiOutlineDelete
+                      className="edit-icon"
+                      size={30}
+                      color="#fff"
+                      cursor="pointer"
                     />
                   </section>
                 </div>
@@ -254,12 +265,18 @@ export default function Acervo() {
                   <FiTriangle className="baixo" onClick={() => handleClick(livro.id)} />
                 </section>
                 <section className="edit">
-                  <BsThreeDotsVertical
+                  <AiOutlineEdit
                     className="edit-icon"
                     size={36}
                     color="#fff"
                     cursor="pointer"
                     onClick={() => handleEdit(livro.id)}
+                  />
+                  <AiOutlineDelete
+                    className="edit-icon"
+                    size={30}
+                    color="#fff"
+                    cursor="pointer"
                   />
                 </section>
               </div>

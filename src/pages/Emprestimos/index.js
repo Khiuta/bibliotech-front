@@ -79,7 +79,9 @@ export default function Emprestimos() {
               <label htmlFor="nome-livro" className="nome">
                 Nome do livro
                 <input
-                  type="text"
+                  autoComplete="off"
+                  list="lista-livros"
+                  type="search"
                   id="nome-livro"
                   value={livro}
                   onChange={(e) => setLivro(e.target.value)}
@@ -87,6 +89,14 @@ export default function Emprestimos() {
                   placeholder="Nome do livro"
                 />
               </label>
+              <datalist id="lista-livros">
+                {livros.filter((buscalivro) => (livro.toLowerCase() === ''
+                  ? buscalivro
+                  : buscalivro.nome.toLowerCase().includes(livro.toLowerCase())
+                )).map((listaLivro) => (
+                  <option key={listaLivro.id}>{listaLivro.nome}</option>
+                ))}
+              </datalist>
               <label htmlFor="autor-livro" className="autor">
                 Autor
                 <input
@@ -122,7 +132,7 @@ export default function Emprestimos() {
               <datalist id="alunos">
                 {alunos.filter((buscaAluno) => (aluno.toLowerCase() === ''
                   ? buscaAluno
-                  : buscaAluno.aluno.toLowerCase().includes(aluno)
+                  : buscaAluno.aluno.toLowerCase().includes(aluno.toLowerCase())
                 )).map((listaAluno) => (
                   <option key={listaAluno.id}>{listaAluno.aluno}</option>
                 ))}

@@ -32,8 +32,17 @@ export default function Popup({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/livros/${id}`, {
-        nome, autor, ano, edicao, editora,
+      await axios.put('/livros/', {
+        nome,
+        autor,
+        ano,
+        edicao,
+        editora,
+        nome_livro,
+        autor_livro,
+        ano_livro,
+        edicao_livro,
+        editora_livro,
       });
       toast.success('Livro atualizado.');
       load();

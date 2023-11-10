@@ -38,5 +38,6 @@ module.exports = {
     'consistent-return': 'off',
     'react/jsx-pascal-case': 'off',
     'no-return-assign': 'off',
+    'linebreak-style': 'off',
   },
 };
