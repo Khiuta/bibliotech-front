@@ -31,12 +31,12 @@ export const Content = styled.main`
     header {
         display: flex;
         flex: 1 1 100%;
-        height: 175px;
+        height: 22%;
         align-items: flex-end;
-        padding: 30px 70px;
         font-size: 30px;
         color: #fff;
         justify-content: space-between;
+        padding: 0px 5%;
     }
 
     input {
@@ -52,15 +52,15 @@ export const Content = styled.main`
     footer {
         display: flex;
         flex: 1 1 100%;
-        height: 160px;
+        height: 10%;
         align-items: center;
         justify-content: flex-end;
         gap: 15px;
-        padding-right: 120px;
+        padding-right: 15px;
     }
 
     footer div {
-        padding: 20px;
+        padding: 10px;
         font-size: 20px;
         border-radius: 10px;
         background: #fff;
@@ -71,19 +71,35 @@ export const Content = styled.main`
         display: flex;
         flex: 1 1 100%;
         align-items: center;
-        height: calc(100vh - 450px);
+        justify-content: flex-start;
+        height: 65%;
         flex-direction: column;
         gap: 15px;
-        padding-top: 20px;
         overflow-y: scroll;
     }
 
     .acervo .caixa {
-      display: flex;
-      flex: 1 1 100%;
-      width: 90%;
-      align-items: center;
-      gap: 10px;
+        display: flex;
+        flex: 1 -1 100%;
+        width: 90%;
+        align-items: center;
+        gap: 10px;
+    }
+    .caixa .edit {
+        display: flex;
+        gap: 5px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: ${greenColor};
+        border-radius: 20px 0 0 20px ;
+        width: 8%;
+        height: 125%;
+
+    }
+    .edit-icon{
+        color: black;
+        border-radius: 50%;
     }
 
     .acervo .livro {
@@ -91,18 +107,22 @@ export const Content = styled.main`
         flex: 1 1 100%;
         width: 100%;
         max-width: 100%;
-        height: 70px;
+        height: 50px;
         max-height: 70px;
         background: #fff;
         border-radius: 20px;
         background: linear-gradient(to left, ${greenColor} 0 7%, #fff 7% 100%);
         font-size: 18px;
         align-items: center;
-        padding: 5px 20px 5px 30px;
+        padding: 5px 20px 5px 0;
         justify-content: space-between;
+    }
+    .livro span{
+        width: 85%;
     }
     .acervo p{
         max-width: 90%
+
     }  
 
     .acervo .livro-exp {
@@ -120,6 +140,9 @@ export const Content = styled.main`
         padding: 5px 20px 5px 30px;
         justify-content: space-between;
         cursor: pointer;
+    }
+    .livro-exp span{
+        width: 85%;
     }
 
     @keyframes pra-cima {

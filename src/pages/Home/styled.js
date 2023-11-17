@@ -45,25 +45,31 @@ export const Content = styled.main`
         align-items: center;
         border-radius: 10px;
     }
+    .lado-2 .cards h2{
+        font-size: 5vh;
+    }
 
-    .lado-2 .cards section h1 {
-        font-size: 200px;
+    .lado-2 .cards section p {
+        font-size: 9.5vh;
     }
 
     .lado-2 .cards .livros {
         width: 40%;
+        height: 80%;
     }
 
     .lado-2 .cards .emp {
         background: ${colors.darkLigtColor};
         color: #fff;
         width: 30%;
+        height: 80%;
     }
 
     .lado-2 .cards .pen {
         background: ${colors.greenColor};
         color: #fff;        
         width: 30%;
+        height: 80%;
     }
 
     .lado-2 .cards-loading {

@@ -77,32 +77,28 @@ export default function Acervo() {
 
     const sheet = workbook.addWorksheet('Acervo Biblioteca LHVR');
     sheet.columns = [
-      { header: 'Nome', key: 'nome', width: 30 },
-      { header: 'Autor', key: 'autor', width: 30 },
-      { header: 'Tombo', key: 'tombo', width: 15 },
-      { header: 'Quantidade', key: 'quantidade', width: 15 },
-      { header: 'Data de chegada', key: 'data_chegada', width: 25 },
-      { header: 'Data de lançamento', key: 'data_lancamento', width: 25 },
-      { header: 'Volume', key: 'volume', width: 15 },
-      { header: 'Edição', key: 'edicao', width: 15 },
-      { header: 'Local', key: 'local', width: 25 },
-      { header: 'Editora', key: 'editora', width: 25 },
+      { header: 'Nome', key: 'nome', width: 70, style: { font: { size: 10, name: 'Arial' } } },
+      { header: 'Autor', key: 'autor', width: 40, style: { font: { size: 10, name: 'Arial' } } },
+      { header: 'Tombo', key: 'id', width: 7, style: { font: { size: 10, name: 'Arial' }, alignment: { horizontal: 'left ' } } },
+      { header: 'Ano', key: 'ano', width: 7, style: { font: { size: 10, name: 'Arial' } } },
+      { header: 'Edição', key: 'edicao', width: 7, style: { font: { size: 10, name: 'Arial' } } },
+      { header: 'Editora', key: 'editora', width: 18, style: { font: { size: 10, name: 'Arial' } } },
     ];
 
     livros.map((value) => {
       sheet.addRow({
         nome: value.nome,
         autor: value.autor,
-        tombo: value.tombo,
-        quantidade: value.quantidade,
-        data_chegada: value.data_chegada,
-        data_lancamento: value.data_lancamento,
-        volume: value.volume,
+        id: value.id,
+        ano: value.ano,
         edicao: value.edicao,
-        local: value.local,
         editora: value.editora,
       });
     });
+
+    sheet.getColumnKey('id').alignment = {
+      horizontal: 'left', vertical: 'middle',
+    };
 
     workbook.xlsx.writeBuffer().then((data) => {
       const blob = new Blob([data], {
@@ -147,17 +143,17 @@ export default function Acervo() {
       <Content>
         <Menu />
         {popup && (
-        <Popup
-          close={handlePopup}
-          load={() => getData()}
-        />
+          <Popup
+            close={handlePopup}
+            load={() => getData()}
+          />
         )}
         {isEditing && (
-        <Edit_popup
-          close={() => closeEdit()}
-          load={() => getData()}
-          id={id}
-        />
+          <Edit_popup
+            close={() => closeEdit()}
+            load={() => getData()}
+            id={id}
+          />
         )}
         <div className="lado-2">
           <header>
@@ -181,22 +177,22 @@ export default function Acervo() {
       <Menu />
       <div className="lado-2">
         {popup && (
-        <Popup
-          close={handlePopup}
-          load={() => getData()}
-        />
+          <Popup
+            close={handlePopup}
+            load={() => getData()}
+          />
         )}
         {isEditing && (
-        <Edit_popup
-          close={() => closeEdit()}
-          load={() => getData()}
-          id={livro_busca.id}
-          nome_livro={livro_busca.nome}
-          autor_livro={livro_busca.autor}
-          ano_livro={livro_busca.ano}
-          edicao_livro={livro_busca.edicao}
-          editora_livro={livro_busca.editora}
-        />
+          <Edit_popup
+            close={() => closeEdit()}
+            load={() => getData()}
+            id={livro_busca.id}
+            nome_livro={livro_busca.nome}
+            autor_livro={livro_busca.autor}
+            ano_livro={livro_busca.ano}
+            edicao_livro={livro_busca.edicao}
+            editora_livro={livro_busca.editora}
+          />
         )}
         {isDeleting && (
           <Delete_popup
@@ -224,6 +220,20 @@ export default function Acervo() {
               return (
                 <div className="caixa">
                   <section className="livro-exp" key={livro.id}>
+                    <section className="edit">
+                      <AiOutlineEdit
+                        className="edit-icon"
+                        size={40}
+                        cursor="pointer"
+                        onClick={() => handleEdit(livro.id)}
+                      />
+                      <AiOutlineDelete
+                        className="edit-icon"
+                        size={40}
+                        cursor="pointer"
+                        onClick={() => handleDelete(livro.id)}
+                      />
+                    </section>
                     <span>
                       <p>
                         {livro.nome}
@@ -253,22 +263,6 @@ export default function Acervo() {
                     {' '}
                     <FiTriangle className={style} onClick={() => handleClick(livro.id)} />
                   </section>
-                  <section className="edit">
-                    <AiOutlineEdit
-                      className="edit-icon"
-                      size={30}
-                      color="#fff"
-                      cursor="pointer"
-                      onClick={() => handleEdit(livro.id)}
-                    />
-                    <AiOutlineDelete
-                      className="edit-icon"
-                      size={30}
-                      color="#fff"
-                      cursor="pointer"
-                      onClick={() => handleDelete(livro.id)}
-                    />
-                  </section>
                 </div>
               );
             }
@@ -276,6 +270,20 @@ export default function Acervo() {
             return (
               <div className="caixa">
                 <section className="livro">
+                  <section className="edit">
+                    <AiOutlineEdit
+                      className="edit-icon"
+                      size={30}
+                      cursor="pointer"
+                      onClick={() => handleEdit(livro.id)}
+                    />
+                    <AiOutlineDelete
+                      className="edit-icon"
+                      size={30}
+                      cursor="pointer"
+                      onClick={() => handleDelete(livro.id)}
+                    />
+                  </section>
                   <span>
                     <p>
                       {livro.nome}
@@ -287,22 +295,6 @@ export default function Acervo() {
                   </span>
                   {' '}
                   <FiTriangle className="baixo" onClick={() => handleClick(livro.id)} />
-                </section>
-                <section className="edit">
-                  <AiOutlineEdit
-                    className="edit-icon"
-                    size={36}
-                    color="#fff"
-                    cursor="pointer"
-                    onClick={() => handleEdit(livro.id)}
-                  />
-                  <AiOutlineDelete
-                    className="edit-icon"
-                    size={30}
-                    color="#fff"
-                    cursor="pointer"
-                    onClick={() => handleDelete(livro.id)}
-                  />
                 </section>
               </div>
             );

@@ -5,16 +5,17 @@ export const Calendario = styled.div`
     flex: 1 1 100%;
 
     .calendario {
-        width: 40vw;
-        height: 54.4vh;
-        margin-left: 20px;
+        width: 39vw;
+        height: 88%;
+        margin-left: 15px;
         color: #000;
         background: #fff;
         border: none;
+        overflow-y: hidden;
     }
 
     .dias {
-        width: 80px;
+        width: calc(100% / 7);
     }
 
     .fc-header-toolbar {

@@ -15,8 +15,8 @@ export const Content = styled.main`
     header {
         display: flex;
         flex: 1 1 100%;
-        height: 175px;
-        align-items: flex-end;
+        height: 15%;
+        align-items: center;
         padding: 30px 70px;
         font-size: 30px;
         color: #fff;
@@ -24,19 +24,18 @@ export const Content = styled.main`
     }
 
     input {
-        margin-bottom: 30px;
         height: 40px;
         border: none;
         border-radius: 20px;
         width: 500px;
         font-size: 25px;
-        padding-left: 50px;
+        padding-left: 30px;
     }
 
     aside {
         display: flex;
         flex: 1 1 100%;
-        height: 60px;
+        height: 8%;
         font-size: 30px;
         color: #fff;
         align-items: center;
@@ -60,7 +59,7 @@ export const Content = styled.main`
         display: flex;
         flex: 1 1 90%;
         width: 90%;
-        height: 100%;
+        font-size: x-large;
         gap: 10%;
         padding-left: 20%;
     }
@@ -82,7 +81,9 @@ export const Content = styled.main`
     .emprestimos {
         display: flex;
         flex: 1 1 100%;
-        height: calc(100vh - 360px);
+        height: 70%;
+        overflow-y: auto;
+
     }
 
     .emprestimos div {
@@ -106,7 +107,7 @@ export const Content = styled.main`
         background: linear-gradient(to right, ${pendente} 0 5%, #fff 5% 100%);
         border-radius: 20px;
         padding: 10px 0px 10px 70px;
-        font-size: 20px;
+        font-size: 18px;
         align-items: center;
         word-wrap: break-word;
     }

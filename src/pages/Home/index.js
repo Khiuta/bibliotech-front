@@ -58,15 +58,15 @@ export default function Home() {
         <div className="cards">
           <section className="livros">
             <h2>Total de livros</h2>
-            <h1>{livros.length}</h1>
+            <p>{livros.length}</p>
           </section>
           <section className="emp">
             <h2>Emprestados</h2>
-            <h1>{emprestimos.length}</h1>
+            <p>{emprestimos.length}</p>
           </section>
           <section className="pen">
             <h2>Pendentes</h2>
-            <h1>{pendentes.length}</h1>
+            <p>{pendentes.length}</p>
           </section>
         </div>
       </div>

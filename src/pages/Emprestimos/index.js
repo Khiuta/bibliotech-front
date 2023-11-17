@@ -34,8 +34,8 @@ export default function Emprestimos() {
       setTurma('');
       setSerie('');
       // #endregion limpando dados
-    } catch {
-      console.log('deu erro');
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -97,6 +97,7 @@ export default function Emprestimos() {
                   <option key={listaLivro.id}>{listaLivro.nome}</option>
                 ))}
               </datalist>
+              <div className="autor-tombo">
               <label htmlFor="autor-livro" className="autor">
                 Autor
                 <input
@@ -113,10 +114,12 @@ export default function Emprestimos() {
                   type="text"
                   id="tombo-livro"
                   value={tombo}
+                  autoComplete="off"
                   // onChange={(e) => setTombo(e.target.value)}
                   placeholder="Tombo do livro"
                 />
               </label>
+              </div>
               <label htmlFor="nome-aluno" className="aluno">
                 Nome do aluno
                 <input
@@ -127,6 +130,7 @@ export default function Emprestimos() {
                   onChange={(e) => setAluno(e.target.value)}
                   onBlur={handleBlur}
                   placeholder="Nome do aluno"
+                  autoComplete="off"
                 />
               </label>
               <datalist id="alunos">
@@ -137,6 +141,7 @@ export default function Emprestimos() {
                   <option key={listaAluno.id}>{listaAluno.aluno}</option>
                 ))}
               </datalist>
+              <div className="turma-serie">
               <label htmlFor="turma-aluno" className="turma">
                 Turma
                 <input
@@ -146,6 +151,8 @@ export default function Emprestimos() {
                   value={turma}
                   onChange={(e) => setTurma(e.target.value)}
                   placeholder="Turma do aluno"
+                  autoComplete="off"
+
                 />
               </label>
               <datalist id="turma">
@@ -164,6 +171,7 @@ export default function Emprestimos() {
                   value={serie}
                   onChange={(e) => setSerie(e.target.value)}
                   placeholder="Série do aluno"
+                  autoComplete="off"
                 />
               </label>
               <datalist id="serie">
@@ -171,6 +179,7 @@ export default function Emprestimos() {
                 <option value="2º Ano">2º Ano</option>
                 <option value="3º Ano">3º Ano</option>
               </datalist>
+              </div>
               <footer>
                 <button type="submit">Confirmar</button>
               </footer>

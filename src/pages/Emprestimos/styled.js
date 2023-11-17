@@ -13,9 +13,11 @@ export const Content = styled.main`
 
     .esq {
         display: flex;
-        flex: 1 1 50%;
+        width: 50%;
+        /* flex: 1 1 50%; */
         height: 100vh;
         flex-wrap: wrap;
+        overflow-y: auto;
     }
 
     .esq header {
@@ -23,27 +25,27 @@ export const Content = styled.main`
         flex: 1 1 100%;
         height: 150px;
         color: #fff;
-        font-size: 25px;
+        font-size: large;
         align-items: flex-end;
         padding: 0px 0px 30px 40px;
     }
 
     .esq .formulario {
         display: flex;
-        flex: 1 1 100%;
         height: calc(100vh - 150px);
-        padding: 20px;
+        width: 100%;
         flex-wrap: wrap;
         color: #fff;
+        padding: 0 10px;
     }
 
     .esq .formulario form {
         display: flex;
+        width: 100%;
         flex: 1 1 100%;
         height: 440px;
         flex-wrap: wrap;
         gap: 10px;
-        padding: 20px;
     }
 
     form .nome {
@@ -53,11 +55,19 @@ export const Content = styled.main`
         flex-direction: column;
     }
 
+    form .autor-tombo{
+        display: flex;
+        width: 95%;
+        height: 85px;
+        gap: 5%;
+    }
+
     form .autor,
     form .tombo {
         display: flex;
         flex: 1 1 40%;
         height: 80px;
+        width: 50%;
         flex-direction: column;
     }
 
@@ -68,11 +78,19 @@ export const Content = styled.main`
         flex-direction: column;
     }
 
+    form .turma-serie{
+        display: flex;
+        width: 95%;
+        gap: 5%;
+        height: 85px;
+    }
+
     form .turma,
     form .serie {
         display: flex;
         flex: 1 1 40%;
         height: 80px;
+        width: 50%;
         flex-direction: column;
     }
 
